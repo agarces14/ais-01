@@ -406,7 +406,122 @@ function Pricing() {
     </section>
   );
 }
+function AgentLab() {
+  const [businessName, setBusinessName] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [website, setWebsite] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState("");
+  const [error, setError] = useState("");
 
+  async function runAgent(e) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setResult("");
+
+    try {
+      const response = await fetch("/api/analyze-business", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          businessName,
+          industry,
+          website,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Agent failed");
+      }
+
+      setResult(data.result);
+    } catch (err) {
+      setError("No se ha podido ejecutar el agente. Revisa la API key o el deploy de Vercel.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section id="agent" className="relative z-10 px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 max-w-4xl">
+          <p className="text-sm uppercase tracking-[0.38em] text-cyan-300">Live Agent</p>
+          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">
+            Run the first AIS-01 intelligence agent.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
+            Analiza un negocio, detecta oportunidades y genera una propuesta premium lista para vender.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          <Glass className="rounded-[2.3rem] p-6 md:p-8">
+            <form onSubmit={runAgent} className="space-y-5">
+              <input
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+                placeholder="Nombre del negocio"
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/40"
+                required
+              />
+
+              <input
+                value={industry}
+                onChange={(e) => setIndustry(e.target.value)}
+                placeholder="Sector: barbería, clínica, inmobiliaria..."
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/40"
+                required
+              />
+
+              <input
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                placeholder="Web actual: https://..."
+                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/40"
+              />
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-cyan-200 disabled:opacity-60"
+              >
+                {loading ? "Analyzing business..." : "Run Lead Intelligence Agent"}
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </form>
+          </Glass>
+
+          <Glass className="min-h-[520px] rounded-[2.3rem] p-6 md:p-8">
+            <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">AIS-01 Output</p>
+            <h3 className="mt-2 text-2xl font-semibold text-white">Lead Intelligence Report</h3>
+
+            <div className="mt-6">
+              {error && <p className="rounded-2xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-300">{error}</p>}
+
+              {!result && !error && (
+                <p className="pt-20 text-center text-zinc-500">
+                  Introduce un negocio real y AIS-01 generará diagnóstico, propuesta y mensaje de captación.
+                </p>
+              )}
+
+              {result && (
+                <div className="max-h-[520px] overflow-y-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/35 p-5 text-sm leading-7 text-zinc-300">
+                  {result}
+                </div>
+              )}
+            </div>
+          </Glass>
+        </div>
+      </div>
+    </section>
+  );
+}
 export default function AIS01LandingPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#050506] text-white selection:bg-cyan-300 selection:text-black">
@@ -478,6 +593,7 @@ export default function AIS01LandingPage() {
 
       <BentoSection />
       <CaseStudies />
+      <AgentLab />
 
       <section id="process" className="relative z-10 px-6 py-24 lg:px-10">
         <div className="mx-auto max-w-7xl rounded-[2.6rem] border border-white/10 bg-white/[0.04] p-7 shadow-2xl shadow-black/40 backdrop-blur-2xl md:p-12">
