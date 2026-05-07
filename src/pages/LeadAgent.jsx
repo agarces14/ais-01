@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, BrainCircuit } from "lucide-react";
 import PrivateGate from "../components/PrivateGate";
+import { supabase } from "../lib/supabase";
 
 function Glass({ children, className = "" }) {
   return (
@@ -19,6 +20,7 @@ export default function LeadAgent() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
+  const [saved, setSaved] = useState(false);
 
   async function runAgent(e) {
     e.preventDefault();
@@ -26,6 +28,7 @@ export default function LeadAgent() {
     setLoading(true);
     setError("");
     setResult("");
+    setSaved(false);
 
     try {
       const response = await fetch("/api/analyze-business", {
@@ -47,10 +50,26 @@ export default function LeadAgent() {
       }
 
       setResult(data.result);
+
+      const { error: supabaseError } = await supabase
+        .from("agent_outputs")
+        .insert([
+          {
+            business_name: businessName,
+            industry: industry,
+            agent_type: "lead-agent",
+            result: data.result,
+          },
+        ]);
+
+      if (supabaseError) {
+        console.error(supabaseError);
+        setSaved(false);
+      } else {
+        setSaved(true);
+      }
     } catch {
-      setError(
-        "No se ha podido ejecutar el agente. Revisa Vercel Logs."
-      );
+      setError("No se ha podido ejecutar el agente. Revisa Vercel Logs.");
     } finally {
       setLoading(false);
     }
@@ -114,7 +133,6 @@ export default function LeadAgent() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black hover:bg-cyan-200 disabled:opacity-60"
                 >
                   {loading ? "Analyzing..." : "Run Lead Agent"}
-
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </form>
@@ -126,6 +144,12 @@ export default function LeadAgent() {
               <h2 className="text-2xl font-semibold">
                 Lead Intelligence Report
               </h2>
+
+              {saved && (
+                <p className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-3 text-sm text-emerald-300">
+                  Saved to AIS-01 CRM.
+                </p>
+              )}
 
               <div className="mt-6">
                 {error && (
