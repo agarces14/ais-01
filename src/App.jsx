@@ -474,10 +474,10 @@ export default function AIS01LandingPage() {
             <a href="#systems" className="transition hover:text-white">Systems</a>
             <a href="#work" className="transition hover:text-white">Work</a>
             <a href="#pricing" className="transition hover:text-white">Pricing</a>
-            <a href="/dashboard" className="transition hover:text-white">Platform</a>
+            <a href="/#/dashboard" className="transition hover:text-white">Platform</a>
           </div>
 
-          <a href="/dashboard" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-cyan-200 sm:inline-flex">
+          <a href="/#/dashboard" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-cyan-200 sm:inline-flex">
             Access Platform
           </a>
 
@@ -502,7 +502,7 @@ export default function AIS01LandingPage() {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a href="/dashboard" className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 font-medium text-black transition hover:bg-cyan-200">
+              <a href="/#/dashboard" className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 font-medium text-black transition hover:bg-cyan-200">
                 Access AIS-01 Platform
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </a>
@@ -581,7 +581,7 @@ export default function AIS01LandingPage() {
             </p>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <a href="/dashboard" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-cyan-200">
+              <a href="/#/dashboard" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-cyan-200">
                 Access AIS-01 Platform
                 <ArrowRight className="h-4 w-4" />
               </a>

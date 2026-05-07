@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -16,7 +16,7 @@ import OutreachAgent from "./pages/OutreachAgent";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -24,6 +24,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 <Route path="/dashboard/proposal-agent" element={<ProposalAgent />} />
 <Route path="/dashboard/outreach-agent" element={<OutreachAgent />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
