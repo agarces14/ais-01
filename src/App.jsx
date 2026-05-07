@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -6,16 +6,13 @@ import {
   CalendarCheck,
   Check,
   Cpu,
-  Database,
   Gauge,
   Layers3,
   LineChart,
   Menu,
   Network,
   Orbit,
-  Radar,
   ShieldCheck,
-  Sparkles,
   Terminal,
   Workflow,
   Zap,
@@ -143,7 +140,10 @@ function FloatingInterface() {
                   <p className="text-lg font-semibold text-white">Autonomous Command</p>
                 </div>
               </div>
-              <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">Live</div>
+
+              <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
+                Live
+              </div>
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[0.9fr_1.15fr]">
@@ -253,7 +253,9 @@ function BentoSection() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 max-w-4xl">
           <p className="text-sm uppercase tracking-[0.38em] text-cyan-300">Infrastructure</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">A complete operating layer, not another agency website.</h2>
+          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">
+            A complete operating layer, not another agency website.
+          </h2>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-12">
@@ -261,12 +263,15 @@ function BentoSection() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.17),transparent_34%)]" />
             <div className="relative flex h-full flex-col justify-between">
               <div>
-                <div className="mb-6 flex h-13 w-13 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300">
                   <Cpu className="h-6 w-6" />
                 </div>
                 <h3 className="text-3xl font-semibold tracking-[-0.05em] md:text-5xl">AI Lead Hunter</h3>
-                <p className="mt-4 max-w-xl text-lg leading-8 text-zinc-400">Detecta negocios con webs débiles, analiza oportunidades, genera auditorías premium y prepara propuestas personalizadas.</p>
+                <p className="mt-4 max-w-xl text-lg leading-8 text-zinc-400">
+                  Detecta negocios con webs débiles, analiza oportunidades, genera auditorías premium y prepara propuestas personalizadas.
+                </p>
               </div>
+
               <div className="mt-10 grid gap-3 sm:grid-cols-3">
                 {[["Scan", "business discovery"], ["Audit", "conversion leaks"], ["Pitch", "premium proposal"]].map(([a, b]) => (
                   <div key={a} className="rounded-2xl border border-white/10 bg-black/30 p-4">
@@ -280,17 +285,24 @@ function BentoSection() {
 
           <Glass className="rounded-[2rem] p-7 lg:col-span-5">
             <div className="mb-7 flex items-center justify-between">
-              <div className="flex h-13 w-13 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-300">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-300">
                 <Gauge className="h-6 w-6" />
               </div>
               <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-400">Live metrics</span>
             </div>
+
             <h3 className="text-3xl font-semibold tracking-[-0.05em]">Revenue dashboard</h3>
+
             <div className="mt-7 space-y-4">
               {[["Qualified leads", "72%"], ["Follow-up automation", "91%"], ["Proposal readiness", "84%"]].map(([label, value]) => (
                 <div key={label}>
-                  <div className="mb-2 flex justify-between text-sm text-zinc-400"><span>{label}</span><span>{value}</span></div>
-                  <div className="h-2 rounded-full bg-white/5"><div className="h-2 rounded-full bg-gradient-to-r from-cyan-300 to-violet-400" style={{ width: value }} /></div>
+                  <div className="mb-2 flex justify-between text-sm text-zinc-400">
+                    <span>{label}</span>
+                    <span>{value}</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-white/5">
+                    <div className="h-2 rounded-full bg-gradient-to-r from-cyan-300 to-violet-400" style={{ width: value }} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -299,7 +311,10 @@ function BentoSection() {
           {capabilities.map((item) => {
             const Icon = item.icon;
             return (
-              <Glass key={item.title} className="group rounded-[2rem] p-6 transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-cyan-300/[0.045] lg:col-span-3">
+              <Glass
+                key={item.title}
+                className="group rounded-[2rem] p-6 transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-cyan-300/[0.045] lg:col-span-3"
+              >
                 <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.055] text-cyan-300">
                   <Icon className="h-6 w-6" />
                 </div>
@@ -321,25 +336,26 @@ function CaseStudies() {
         <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="text-sm uppercase tracking-[0.38em] text-cyan-300">Demo Systems</p>
-            <h2 className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.06em] md:text-7xl">Portfolio that feels like software, not templates.</h2>
+            <h2 className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.06em] md:text-7xl">
+              Portfolio that feels like software, not templates.
+            </h2>
           </div>
-          <p className="max-w-md text-lg leading-8 text-zinc-400">Cada demo parece una empresa real: visual premium, automatización vendible y propuesta clara.</p>
+          <p className="max-w-md text-lg leading-8 text-zinc-400">
+            Cada demo parece una empresa real: visual premium, automatización vendible y propuesta clara.
+          </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {caseStudies.map((item, index) => (
-            <motion.div
-              key={item.title}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.25 }}
-              className="group"
-            >
+          {caseStudies.map((item) => (
+            <motion.div key={item.title} whileHover={{ y: -8 }} transition={{ duration: 0.25 }} className="group">
               <Glass className="relative min-h-[470px] overflow-hidden rounded-[2.3rem] p-5">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_10%,rgba(34,211,238,0.17),transparent_34%),linear-gradient(to_bottom,rgba(255,255,255,0.055),transparent_55%)]" />
                 <div className="relative flex h-full flex-col justify-between">
                   <div>
                     <div className="mb-5 flex items-center justify-between">
-                      <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 text-xs text-zinc-400">{item.type}</span>
+                      <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 text-xs text-zinc-400">
+                        {item.type}
+                      </span>
                       <ArrowRight className="h-4 w-4 text-zinc-600 transition group-hover:translate-x-1 group-hover:text-cyan-300" />
                     </div>
 
@@ -350,6 +366,7 @@ function CaseStudies() {
                         <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
                         <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
                       </div>
+
                       <div className="relative grid h-[170px] grid-cols-6 grid-rows-5 gap-2">
                         <div className="col-span-2 row-span-5 rounded-2xl bg-white/[0.06]" />
                         <div className="col-span-4 row-span-2 rounded-2xl bg-gradient-to-br from-cyan-300/25 to-blue-500/10" />
@@ -381,20 +398,36 @@ function Pricing() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 max-w-4xl">
           <p className="text-sm uppercase tracking-[0.38em] text-cyan-300">Monetizable Offers</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">Packages designed to close, then scale.</h2>
+          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">
+            Packages designed to close, then scale.
+          </h2>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
           {pricing.map((plan) => (
-            <Glass key={plan.name} className={cn("relative overflow-hidden rounded-[2.3rem] p-7", plan.featured && "border-cyan-300/40 bg-cyan-300/[0.06]")}>
-              {plan.featured && <div className="absolute right-5 top-5 rounded-full bg-cyan-300 px-3 py-1 text-xs font-medium text-black">Best entry</div>}
+            <Glass
+              key={plan.name}
+              className={cn(
+                "relative overflow-hidden rounded-[2.3rem] p-7",
+                plan.featured && "border-cyan-300/40 bg-cyan-300/[0.06]"
+              )}
+            >
+              {plan.featured && (
+                <div className="absolute right-5 top-5 rounded-full bg-cyan-300 px-3 py-1 text-xs font-medium text-black">
+                  Best entry
+                </div>
+              )}
+
               <h3 className="text-2xl font-semibold tracking-[-0.04em]">{plan.name}</h3>
               <p className="mt-4 min-h-[56px] text-sm leading-7 text-zinc-400">{plan.desc}</p>
               <p className="mt-8 text-5xl font-semibold tracking-[-0.07em]">{plan.price}</p>
+
               <div className="mt-8 space-y-3">
                 {plan.features.map((feature) => (
                   <div key={feature} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-black"><Check className="h-3 w-3" /></span>
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-black">
+                      <Check className="h-3 w-3" />
+                    </span>
                     {feature}
                   </div>
                 ))}
@@ -406,264 +439,19 @@ function Pricing() {
     </section>
   );
 }
-function ProposalAgent() {
-  const [businessName, setBusinessName] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [problem, setProblem] = useState("");
-  const [budgetLevel, setBudgetLevel] = useState("medium");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState("");
-  const [error, setError] = useState("");
 
-  async function runProposal(e) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setResult("");
-
-    try {
-      const response = await fetch("/api/generate-proposal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          businessName,
-          industry,
-          problem,
-          budgetLevel,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Proposal Agent failed");
-      }
-
-      setResult(data.result);
-    } catch (err) {
-      setError("No se ha podido ejecutar el Proposal Agent. Revisa Vercel Logs.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <section id="proposal-agent" className="relative z-10 px-6 py-24 lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 max-w-4xl">
-          <p className="text-sm uppercase tracking-[0.38em] text-violet-300">
-            Proposal Agent
-          </p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">
-            Turn analysis into a premium offer.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-            Convierte un diagnóstico en una propuesta comercial vendible, con precio, paquete, beneficios y mensaje para cerrar.
-          </p>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Glass className="rounded-[2.3rem] p-6 md:p-8">
-            <form onSubmit={runProposal} className="space-y-5">
-              <input
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                placeholder="Nombre del negocio"
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-violet-300/40"
-                required
-              />
-
-              <input
-                value={industry}
-                onChange={(e) => setIndustry(e.target.value)}
-                placeholder="Sector: clínica, gimnasio, inmobiliaria..."
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-violet-300/40"
-                required
-              />
-
-              <textarea
-                value={problem}
-                onChange={(e) => setProblem(e.target.value)}
-                placeholder="Problema principal detectado: mala web, pocos leads, no responde rápido..."
-                className="min-h-[130px] w-full resize-none rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-violet-300/40"
-              />
-
-              <select
-                value={budgetLevel}
-                onChange={(e) => setBudgetLevel(e.target.value)}
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none focus:border-violet-300/40"
-              >
-                <option value="low">Presupuesto bajo</option>
-                <option value="medium">Presupuesto medio</option>
-                <option value="high">Presupuesto alto</option>
-              </select>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-violet-200 disabled:opacity-60"
-              >
-                {loading ? "Generating proposal..." : "Run Proposal Agent"}
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
-          </Glass>
-
-          <Glass className="min-h-[520px] rounded-[2.3rem] p-6 md:p-8">
-            <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
-              AIS-01 Output
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold text-white">
-              Premium Proposal
-            </h3>
-
-            <div className="mt-6">
-              {error && (
-                <p className="rounded-2xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-300">
-                  {error}
-                </p>
-              )}
-
-              {!result && !error && (
-                <p className="pt-20 text-center text-zinc-500">
-                  Introduce un negocio y AIS-01 generará una propuesta comercial premium.
-                </p>
-              )}
-
-              {result && (
-                <div className="max-h-[520px] overflow-y-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/35 p-5 text-sm leading-7 text-zinc-300">
-                  {result}
-                </div>
-              )}
-            </div>
-          </Glass>
-        </div>
-      </div>
-    </section>
-  );
-}
-function AgentLab() {
-  const [businessName, setBusinessName] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [website, setWebsite] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState("");
-  const [error, setError] = useState("");
-
-  async function runAgent(e) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setResult("");
-
-    try {
-      const response = await fetch("/api/analyze-business", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          businessName,
-          industry,
-          website,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Agent failed");
-      }
-
-      setResult(data.result);
-    } catch (err) {
-      setError("No se ha podido ejecutar el agente. Revisa la API key o el deploy de Vercel.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <section id="agent" className="relative z-10 px-6 py-24 lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 max-w-4xl">
-          <p className="text-sm uppercase tracking-[0.38em] text-cyan-300">Live Agent</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">
-            Run the first AIS-01 intelligence agent.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-            Analiza un negocio, detecta oportunidades y genera una propuesta premium lista para vender.
-          </p>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Glass className="rounded-[2.3rem] p-6 md:p-8">
-            <form onSubmit={runAgent} className="space-y-5">
-              <input
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                placeholder="Nombre del negocio"
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/40"
-                required
-              />
-
-              <input
-                value={industry}
-                onChange={(e) => setIndustry(e.target.value)}
-                placeholder="Sector: barbería, clínica, inmobiliaria..."
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/40"
-                required
-              />
-
-              <input
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-                placeholder="Web actual: https://..."
-                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/40"
-              />
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-cyan-200 disabled:opacity-60"
-              >
-                {loading ? "Analyzing business..." : "Run Lead Intelligence Agent"}
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
-          </Glass>
-
-          <Glass className="min-h-[520px] rounded-[2.3rem] p-6 md:p-8">
-            <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">AIS-01 Output</p>
-            <h3 className="mt-2 text-2xl font-semibold text-white">Lead Intelligence Report</h3>
-
-            <div className="mt-6">
-              {error && <p className="rounded-2xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-300">{error}</p>}
-
-              {!result && !error && (
-                <p className="pt-20 text-center text-zinc-500">
-                  Introduce un negocio real y AIS-01 generará diagnóstico, propuesta y mensaje de captación.
-                </p>
-              )}
-
-              {result && (
-                <div className="max-h-[520px] overflow-y-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/35 p-5 text-sm leading-7 text-zinc-300">
-                  {result}
-                </div>
-              )}
-            </div>
-          </Glass>
-        </div>
-      </div>
-    </section>
-  );
-}
 export default function AIS01LandingPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#050506] text-white selection:bg-cyan-300 selection:text-black">
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-70" style={{ backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)", backgroundSize: "78px 78px", maskImage: "radial-gradient(ellipse at top, black, transparent 72%)" }} />
+      <div
+        className="pointer-events-none fixed inset-0 z-0 opacity-70"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)",
+          backgroundSize: "78px 78px",
+          maskImage: "radial-gradient(ellipse at top, black, transparent 72%)",
+        }}
+      />
       <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),transparent_35%),radial-gradient(circle_at_85%_20%,rgba(168,85,247,0.12),transparent_30%)]" />
 
       <section className="relative z-10 px-6 pb-24 pt-6 lg:px-10 lg:pb-36">
@@ -681,19 +469,25 @@ export default function AIS01LandingPage() {
               <p className="hidden text-[10px] uppercase tracking-[0.22em] text-zinc-500 sm:block">Autonomous Intelligence</p>
             </div>
           </div>
+
           <div className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
             <a href="#systems" className="transition hover:text-white">Systems</a>
             <a href="#work" className="transition hover:text-white">Work</a>
             <a href="#pricing" className="transition hover:text-white">Pricing</a>
-            <a href="#contact" className="transition hover:text-white">Contact</a>
+            <a href="/dashboard" className="transition hover:text-white">Platform</a>
           </div>
-          <a href="#contact" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-cyan-200 sm:inline-flex">Start System</a>
+
+          <a href="/dashboard" className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-cyan-200 sm:inline-flex">
+            Access Platform
+          </a>
+
           <Menu className="h-5 w-5 text-zinc-400 md:hidden" />
         </nav>
 
         <div className="mx-auto grid max-w-7xl items-center gap-20 pt-20 lg:grid-cols-[1.02fr_0.98fr] lg:pt-28">
           <div>
             <Badge>AI-native operating studio · Premium automation</Badge>
+
             <motion.h1
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -702,14 +496,17 @@ export default function AIS01LandingPage() {
             >
               Build the system your competitors will copy too late.
             </motion.h1>
+
             <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-400 md:text-xl">
               AIS-01 creates AI-native web systems, automation workflows and revenue infrastructure for businesses that want to look premium, operate faster and convert better.
             </p>
+
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a href="#contact" className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 font-medium text-black transition hover:bg-cyan-200">
-                Build your operating system
+              <a href="/dashboard" className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 font-medium text-black transition hover:bg-cyan-200">
+                Access AIS-01 Platform
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </a>
+
               <a href="#work" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.055] px-6 py-4 font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.09]">
                 See demo systems
               </a>
@@ -731,8 +528,6 @@ export default function AIS01LandingPage() {
 
       <BentoSection />
       <CaseStudies />
-      <AgentLab />
-      <ProposalAgent />
 
       <section id="process" className="relative z-10 px-6 py-24 lg:px-10">
         <div className="mx-auto max-w-7xl rounded-[2.6rem] border border-white/10 bg-white/[0.04] p-7 shadow-2xl shadow-black/40 backdrop-blur-2xl md:p-12">
@@ -741,10 +536,18 @@ export default function AIS01LandingPage() {
               <p className="text-sm uppercase tracking-[0.38em] text-cyan-300">Execution Protocol</p>
               <h2 className="mt-4 text-4xl font-semibold tracking-[-0.06em] md:text-7xl">From objective to operating system.</h2>
             </div>
+
             <div className="grid gap-4">
-              {[["Audit", "Detectamos fugas de percepción, conversión y operación."], ["Architect", "Diseñamos interfaz, sistema, automatización y oferta."], ["Deploy", "Lanzamos web, formularios, flujos y dashboards."], ["Optimize", "Medimos, iteramos y escalamos lo que genera dinero."]].map(([title, desc], i) => (
+              {[
+                ["Audit", "Detectamos fugas de percepción, conversión y operación."],
+                ["Architect", "Diseñamos interfaz, sistema, automatización y oferta."],
+                ["Deploy", "Lanzamos web, formularios, flujos y dashboards."],
+                ["Optimize", "Medimos, iteramos y escalamos lo que genera dinero."],
+              ].map(([title, desc], i) => (
                 <div key={title} className="flex gap-5 rounded-3xl border border-white/10 bg-black/28 p-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-black">{String(i + 1).padStart(2, "0")}</div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-black">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
                   <div>
                     <h3 className="text-lg font-medium text-white">{title}</h3>
                     <p className="mt-1 text-sm leading-6 text-zinc-500">{desc}</p>
@@ -760,22 +563,30 @@ export default function AIS01LandingPage() {
 
       <section id="contact" className="relative z-10 px-6 py-28 lg:px-10">
         <Glow className="left-1/2 top-1/2 h-[520px] w-[760px] -translate-x-1/2 -translate-y-1/2 bg-cyan-500/16" />
+
         <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.8rem] border border-white/10 bg-white/[0.045] p-8 text-center shadow-2xl shadow-black/50 backdrop-blur-2xl md:p-16">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.16),transparent_36%)]" />
+
           <div className="relative">
             <div className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] text-cyan-300">
               <Zap className="h-8 w-8" />
             </div>
-            <h2 className="text-5xl font-semibold tracking-[-0.075em] md:text-7xl">Start with the system. Scale into the company.</h2>
+
+            <h2 className="text-5xl font-semibold tracking-[-0.075em] md:text-7xl">
+              Start with the system. Scale into the company.
+            </h2>
+
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-zinc-400">
               First we build the premium web system. Then we connect automation. Then we turn the business into an AI-native operation.
             </p>
+
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <a href="mailto:hello@ais01.ai" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-cyan-200">
-                Start AIS-01
+              <a href="/dashboard" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-black transition hover:bg-cyan-200">
+                Access AIS-01 Platform
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.055] px-7 py-4 font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.09]">
+
+              <a href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-7 py-4 font-medium text-white transition hover:bg-white/[0.08]">
                 <CalendarCheck className="h-4 w-4" />
                 See packages
               </a>
