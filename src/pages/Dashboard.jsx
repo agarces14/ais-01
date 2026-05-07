@@ -16,6 +16,7 @@ export default function Dashboard() {
             <p className="text-xs uppercase tracking-[0.3em] text-zinc-500">
               AIS-01
             </p>
+
             <h1 className="mt-2 text-3xl font-semibold tracking-[-0.06em]">
               Dashboard
             </h1>
@@ -62,16 +63,22 @@ export default function Dashboard() {
               [
                 "Lead Intelligence",
                 "Analyze businesses and detect opportunities.",
+                "/dashboard/lead-agent",
+                "hover:bg-cyan-200",
               ],
               [
                 "Proposal Engine",
                 "Generate premium offers and pricing.",
+                "/dashboard/proposal-agent",
+                "hover:bg-violet-200",
               ],
               [
                 "Outreach System",
                 "Create personalized sales messages.",
+                "#",
+                "hover:bg-white",
               ],
-            ].map(([title, desc]) => (
+            ].map(([title, desc, link, hover]) => (
               <div
                 key={title}
                 className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-2xl"
@@ -82,11 +89,16 @@ export default function Dashboard() {
                   {title}
                 </h3>
 
-                <p className="mt-3 leading-7 text-zinc-400">{desc}</p>
+                <p className="mt-3 leading-7 text-zinc-400">
+                  {desc}
+                </p>
 
-                <button className="mt-8 rounded-full bg-white px-5 py-3 text-sm font-medium text-black transition hover:bg-cyan-200">
+                <a
+                  href={link}
+                  className={`mt-8 inline-block rounded-full bg-white px-5 py-3 text-sm font-medium text-black transition ${hover}`}
+                >
                   Open Agent
-                </button>
+                </a>
               </div>
             ))}
           </div>
