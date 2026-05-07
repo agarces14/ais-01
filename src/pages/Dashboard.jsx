@@ -73,10 +73,12 @@ export default function Dashboard() {
                 "hover:bg-violet-200",
               ],
               [
-                "Outreach System",
-                "Create personalized sales messages.",
-                "#",
-                "hover:bg-white",
+                [
+  "Outreach System",
+  "Create personalized sales messages.",
+  "/dashboard/outreach-agent",
+  "hover:bg-emerald-200",
+],
               ],
             ].map(([title, desc, link, hover]) => (
               <div
