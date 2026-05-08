@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   BrainCircuit,
+  Database,
   FileText,
   LayoutDashboard,
   MessageSquare,
@@ -9,7 +10,6 @@ import {
 
 export default function Dashboard() {
   const [accessCode, setAccessCode] = useState("");
-
   const hasAccess = accessCode === "agente007";
 
   if (!hasAccess) {
@@ -39,10 +39,36 @@ export default function Dashboard() {
     );
   }
 
+  const cards = [
+    {
+      title: "Lead Intelligence",
+      desc: "Analyze businesses and detect opportunities.",
+      link: "/#/dashboard/lead-agent",
+      hover: "hover:bg-cyan-200",
+    },
+    {
+      title: "Proposal Engine",
+      desc: "Generate premium offers and pricing.",
+      link: "/#/dashboard/proposal-agent",
+      hover: "hover:bg-violet-200",
+    },
+    {
+      title: "Outreach System",
+      desc: "Create personalized sales messages.",
+      link: "/#/dashboard/outreach-agent",
+      hover: "hover:bg-emerald-200",
+    },
+    {
+      title: "CRM History",
+      desc: "View saved agent outputs and lead intelligence.",
+      link: "/#/dashboard/crm",
+      hover: "hover:bg-cyan-200",
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-[#050506] text-white">
       <div className="flex">
-        {/* Sidebar */}
         <aside className="flex min-h-screen w-[280px] flex-col border-r border-white/10 bg-black/30 p-6 backdrop-blur-2xl">
           <div className="mb-10">
             <p className="text-xs uppercase tracking-[0.3em] text-zinc-500">
@@ -56,24 +82,25 @@ export default function Dashboard() {
 
           <nav className="space-y-3">
             {[
-              ["Overview", LayoutDashboard],
-              ["Lead Agent", BrainCircuit],
-              ["Proposal Agent", FileText],
-              ["Outreach Agent", MessageSquare],
-              ["Settings", Settings],
-            ].map(([label, Icon]) => (
-              <button
+              ["Overview", LayoutDashboard, "/#/dashboard"],
+              ["Lead Agent", BrainCircuit, "/#/dashboard/lead-agent"],
+              ["Proposal Agent", FileText, "/#/dashboard/proposal-agent"],
+              ["Outreach Agent", MessageSquare, "/#/dashboard/outreach-agent"],
+              ["CRM History", Database, "/#/dashboard/crm"],
+              ["Settings", Settings, "#"],
+            ].map(([label, Icon, link]) => (
+              <a
                 key={label}
+                href={link}
                 className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-zinc-300 transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.06]"
               >
                 <Icon className="h-5 w-5" />
                 <span>{label}</span>
-              </button>
+              </a>
             ))}
           </nav>
         </aside>
 
-        {/* Main */}
         <section className="flex-1 p-8">
           <div className="mb-10">
             <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">
@@ -90,46 +117,25 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-3">
-            {[
-              [
-                "Lead Intelligence",
-                "Analyze businesses and detect opportunities.",
-                "/dashboard/lead-agent",
-                "hover:bg-cyan-200",
-              ],
-              [
-                "Proposal Engine",
-                "Generate premium offers and pricing.",
-                "/dashboard/proposal-agent",
-                "hover:bg-violet-200",
-              ],
-              [
-                "Outreach System",
-                "Create personalized sales messages.",
-                "/dashboard/outreach-agent",
-                "hover:bg-emerald-200",
-              ],
-            ].map(([title, desc, link, hover]) => (
+          <div className="grid gap-5 lg:grid-cols-4">
+            {cards.map((card) => (
               <div
-                key={title}
+                key={card.title}
                 className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-2xl"
               >
                 <div className="mb-6 h-32 rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-cyan-300/10 to-violet-400/10" />
 
                 <h3 className="text-2xl font-semibold tracking-[-0.04em]">
-                  {title}
+                  {card.title}
                 </h3>
 
-                <p className="mt-3 leading-7 text-zinc-400">
-                  {desc}
-                </p>
+                <p className="mt-3 leading-7 text-zinc-400">{card.desc}</p>
 
                 <a
-                  href={link}
-                  className={`mt-8 inline-block rounded-full bg-white px-5 py-3 text-sm font-medium text-black transition ${hover}`}
+                  href={card.link}
+                  className={`mt-8 inline-block rounded-full bg-white px-5 py-3 text-sm font-medium text-black transition ${card.hover}`}
                 >
-                  Open Agent
+                  Open
                 </a>
               </div>
             ))}

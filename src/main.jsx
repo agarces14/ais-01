@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import LeadAgent from "./pages/LeadAgent";
 import ProposalAgent from "./pages/ProposalAgent";
 import OutreachAgent from "./pages/OutreachAgent";
+import CRM from "./pages/CRM";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/dashboard/lead-agent" element={<LeadAgent />} />
 <Route path="/dashboard/proposal-agent" element={<ProposalAgent />} />
 <Route path="/dashboard/outreach-agent" element={<OutreachAgent />} />
+<Route path="/dashboard/crm" element={<CRM />} />
       </Routes>
     </HashRouter>
   </React.StrictMode>
