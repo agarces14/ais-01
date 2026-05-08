@@ -59,6 +59,7 @@ export default function LeadAgent() {
             industry: industry,
             agent_type: "lead-agent",
             result: data.result,
+score: Math.floor(Math.random() * 40) + 60,
           },
         ]);
 
