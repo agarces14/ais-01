@@ -14,6 +14,7 @@ import LeadAgent from "./pages/LeadAgent";
 import ProposalAgent from "./pages/ProposalAgent";
 import OutreachAgent from "./pages/OutreachAgent";
 import CRM from "./pages/CRM";
+import WebsiteAuditAgent from "./pages/WebsiteAuditAgent";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -25,6 +26,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 <Route path="/dashboard/proposal-agent" element={<ProposalAgent />} />
 <Route path="/dashboard/outreach-agent" element={<OutreachAgent />} />
 <Route path="/dashboard/crm" element={<CRM />} />
+<Route
+  path="/dashboard/website-audit"
+  element={<WebsiteAuditAgent />}
+/>
       </Routes>
     </HashRouter>
   </React.StrictMode>
