@@ -59,6 +59,12 @@ export default function Dashboard() {
       hover: "hover:bg-emerald-200",
     },
     {
+        title: "Website Audit",
+     desc: "Analyze websites, UX, conversion and premium perception.",
+     link: "/#/dashboard/website-audit",
+        hover: "hover:bg-cyan-200",
+},
+    {
       title: "CRM History",
       desc: "View saved agent outputs and lead intelligence.",
       link: "/#/dashboard/crm",
