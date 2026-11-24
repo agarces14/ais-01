@@ -1,16 +1,30 @@
-# React + Vite
+# AIS-01
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Panel privado con agentes de IA: análisis de negocio, auditoría web, propuestas y mensajes de respuesta, con un CRM sencillo en Supabase.
 
-Currently, two official plugins are available:
+## Seguridad
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Acceso**: Supabase Auth (email y contraseña). No hay registro público.
+- **APIs** (`/api/*`): exigen una sesión válida de Supabase. Si se define `ALLOWED_EMAILS`, solo esos usuarios pueden usarlas.
+- **Datos**: la tabla `agent_outputs` debe tener RLS activado (`supabase/rls.sql`).
+- **Coste**: límite de longitud de entrada y de tokens de salida por llamada. Configura también un límite mensual en el panel de OpenAI.
 
-## React Compiler
+## Auditoría web
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+`/api/website-audit` descarga el HTML real de la web (con protección contra direcciones internas, tiempo máximo y tamaño máximo), extrae hechos observables y la IA solo comenta sobre ellos. Si la web no se puede abrir, no genera auditoría. No evalúa diseño visual ni velocidad.
 
-## Expanding the ESLint configuration
+## Puesta en marcha
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. `cp .env.example .env` y rellena las variables.
+2. En Supabase:
+   - Ejecuta `supabase/rls.sql`.
+   - Desactiva el registro público.
+   - Crea tu usuario.
+3. En Vercel, define `OPENAI_API_KEY`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` y, opcionalmente, `ALLOWED_EMAILS`.
+4. `npm ci && npm run dev`.
+
+## Comandos
+
+- `npm run dev`: desarrollo
+- `npm run build`: compilación
+- `npm run lint`: revisión de código

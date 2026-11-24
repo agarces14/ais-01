@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, BrainCircuit } from "lucide-react";
 import PrivateGate from "../components/PrivateGate";
+import { apiPost } from "../lib/api";
 import { supabase } from "../lib/supabase";
 
 function Glass({ children, className = "" }) {
@@ -31,23 +32,11 @@ export default function LeadAgent() {
     setSaved(false);
 
     try {
-      const response = await fetch("/api/analyze-business", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const data = await apiPost("/api/analyze-business", {
           businessName,
           industry,
           website,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Agent failed");
-      }
+        });
 
       setResult(data.result);
 
@@ -59,7 +48,7 @@ export default function LeadAgent() {
             industry: industry,
             agent_type: "lead-agent",
             result: data.result,
-score: Math.floor(Math.random() * 40) + 60,
+score: null,
           },
         ]);
 
@@ -69,8 +58,8 @@ score: Math.floor(Math.random() * 40) + 60,
       } else {
         setSaved(true);
       }
-    } catch {
-      setError("No se ha podido ejecutar el agente. Revisa Vercel Logs.");
+    } catch (err) {
+      setError(err?.message || "No se ha podido ejecutar el agente. Revisa Vercel Logs.");
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, MessageSquare } from "lucide-react";
 import PrivateGate from "../components/PrivateGate";
+import { apiPost } from "../lib/api";
 
 function Glass({ children, className = "" }) {
   return (
@@ -29,28 +30,16 @@ export default function OutreachAgent() {
     setResult("");
 
     try {
-      const response = await fetch("/api/generate-outreach", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const data = await apiPost("/api/generate-outreach", {
           businessName,
           industry,
           platform,
           goal,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Outreach Agent failed");
-      }
+        });
 
       setResult(data.result);
-    } catch {
-      setError("No se ha podido ejecutar el Outreach Agent.");
+    } catch (err) {
+      setError(err?.message || "No se ha podido ejecutar el Outreach Agent.");
     } finally {
       setLoading(false);
     }

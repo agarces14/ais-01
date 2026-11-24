@@ -3,7 +3,7 @@ import { Database } from "lucide-react";
 import PrivateGate from "../components/PrivateGate";
 import { supabase } from "../lib/supabase";
 
-export default function CRM() {
+function CRMContent() {
   const [outputs, setOutputs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,11 +23,12 @@ export default function CRM() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- carga inicial de datos
     loadOutputs();
   }, []);
 
   return (
-    <PrivateGate>
+    <>
       <main className="min-h-screen bg-[#050506] px-6 py-10 text-white lg:px-10">
         <div className="mx-auto max-w-7xl">
           <a href="/#/dashboard" className="text-sm text-zinc-400 hover:text-white">
@@ -95,9 +96,11 @@ export default function CRM() {
                       </p>
                     </div>
 
-                    <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
-                      Score: {item.score || 0}
-                    </span>
+                    {item.score != null && (
+                      <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
+                        Score: {item.score}
+                      </span>
+                    )}
                   </div>
 
                   <div className="max-h-[260px] overflow-y-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/35 p-4 text-sm leading-7 text-zinc-300">
@@ -109,6 +112,15 @@ export default function CRM() {
           </div>
         </div>
       </main>
+    </>
+  );
+}
+// El contenido (y su consulta a Supabase) solo se monta con sesión iniciada,
+// para que las reglas RLS devuelvan los datos del usuario autenticado.
+export default function CRM() {
+  return (
+    <PrivateGate>
+      <CRMContent />
     </PrivateGate>
   );
 }

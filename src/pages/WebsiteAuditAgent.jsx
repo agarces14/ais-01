@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, Globe } from "lucide-react";
 import PrivateGate from "../components/PrivateGate";
+import { apiPost } from "../lib/api";
 
 function Glass({ children, className = "" }) {
   return (
@@ -26,25 +27,13 @@ export default function WebsiteAuditAgent() {
     setError("");
 
     try {
-      const response = await fetch("/api/website-audit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const data = await apiPost("/api/website-audit", {
           website,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Audit failed");
-      }
+        });
 
       setResult(data.result);
-    } catch {
-      setError("No se ha podido ejecutar el Website Audit Agent.");
+    } catch (err) {
+      setError(err?.message || "No se ha podido ejecutar el Website Audit Agent.");
     } finally {
       setLoading(false);
     }
