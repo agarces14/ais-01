@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, FileText } from "lucide-react";
 import PrivateGate from "../components/PrivateGate";
+import { apiPost } from "../lib/api";
 
 function Glass({ children, className = "" }) {
   return (
@@ -29,30 +30,16 @@ export default function ProposalAgent() {
     setResult("");
 
     try {
-      const response = await fetch("/api/generate-proposal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const data = await apiPost("/api/generate-proposal", {
           businessName,
           industry,
           problem,
           budgetLevel,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Proposal Agent failed");
-      }
+        });
 
       setResult(data.result);
-    } catch {
-      setError(
-        "No se ha podido ejecutar el Proposal Agent. Revisa Vercel Logs."
-      );
+    } catch (err) {
+      setError(err?.message || "No se ha podido ejecutar el Proposal Agent. Revisa Vercel Logs.");
     } finally {
       setLoading(false);
     }

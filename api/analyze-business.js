@@ -1,56 +1,48 @@
 import OpenAI from "openai";
+import { requireUser, text, onlyPost, MODEL, MAX_OUTPUT_TOKENS, HONESTY_RULES } from "./_lib.js";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Only POST requests allowed" });
-  }
+  if (!onlyPost(req, res)) return;
+  if (!(await requireUser(req, res))) return;
 
   try {
-    const { businessName, industry, website } = req.body;
+    const businessName = text(req.body?.businessName, 120);
+    const industry = text(req.body?.industry, 120);
+    const website = text(req.body?.website, 300);
 
     if (!businessName || !industry) {
-      return res.status(400).json({
-        error: "businessName and industry are required",
-      });
+      return res.status(400).json({ error: "businessName and industry are required" });
     }
 
     const prompt = `
-You are AIS-01 Lead Intelligence Agent.
+Eres el agente de análisis de negocio de AIS-01, consultor de webs y automatización.
 
-Analyze this business as a premium AI automation and web systems consultant.
+Negocio: ${businessName}
+Sector: ${industry}
+Web: ${website || "No indicada"}
 
-Business name: ${businessName}
-Industry: ${industry}
-Website: ${website || "Not provided"}
+Importante: NO has visitado la web. Trabaja solo con el nombre y el sector, y deja claro
+que son hipótesis a comprobar, no hallazgos.
 
-Return a structured analysis in Spanish with:
-
-1. Diagnóstico general
-2. Problemas probables de conversión
-3. Oportunidades de automatización
-4. Ideas de sistema IA vendible
-5. Propuesta premium para enviar al cliente
-6. Mensaje corto de outreach por email/Instagram
-
-Make it practical, premium, direct and monetizable.
-`;
+Devuelve en español:
+1. Hipótesis generales sobre el negocio (marcadas como hipótesis)
+2. Problemas de conversión habituales en este sector
+3. Oportunidades de automatización realistas
+4. Qué servicio le podría encajar y por qué
+5. Preguntas que habría que hacerle antes de proponer nada
+${HONESTY_RULES}`;
 
     const response = await client.responses.create({
-      model: "gpt-4.1-mini",
+      model: MODEL,
       input: prompt,
+      max_output_tokens: MAX_OUTPUT_TOKENS,
     });
 
-    return res.status(200).json({
-      result: response.output_text,
-    });
+    return res.status(200).json({ result: response.output_text });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      error: "Agent failed",
-    });
+    console.error("analyze-business", error?.message);
+    return res.status(500).json({ error: "Agent failed" });
   }
 }
